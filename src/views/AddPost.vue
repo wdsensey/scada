@@ -8,7 +8,6 @@
         </div>
       </flickity>
     </div>
-    <PostsList @loadMorePosts="loadMorePosts" :posts="listPosts" />
     <Footer />
   </div>
 </template>
@@ -17,16 +16,14 @@
 // @ is an alias to /src
 import Header from '@/components/Header.vue';
 import Footer from '@/components/Footer.vue';
-import PostsList from '@/components/PostsList.vue';
 import Flickity from 'vue-flickity';
 import axios from 'axios';
 
 export default {
-  name: 'Home',
+  name: 'AddPost',
   components: {
     Header,
     Footer,
-    PostsList,
     Flickity,
   },
   data() {
