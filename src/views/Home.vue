@@ -1,43 +1,32 @@
 <template>
   <div class="home">
-    <Header />
     <div class="container">
-      <flickity ref="flickity" class="home-slider" :options="flickityOptions" v-if="sliderPosts">
-        <div class="carousel-cell" v-for="post in sliderPosts" :key="post.id">
-          <div class="title">{{ post.title }}</div>
-        </div>
-      </flickity>
+      <Slider :sliderPosts="sliderPosts" @sendModalData="openModal" />
     </div>
-    <PostsList @loadMorePosts="loadMorePosts" :posts="listPosts" />
-    <Footer />
+    <modal v-if="showModal" :modalData="modalData" @close="showModal = false"></modal>
+    <PostsList :posts="listPosts"
+               @sendModalData="openModal"
+               @loadMorePosts="loadMorePosts(data)" />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import Header from '@/components/Header.vue';
-import Footer from '@/components/Footer.vue';
 import PostsList from '@/components/PostsList.vue';
-import Flickity from 'vue-flickity';
+import Slider from '@/components/Slider.vue';
 import axios from 'axios';
 
 export default {
   name: 'Home',
   components: {
-    Header,
-    Footer,
     PostsList,
-    Flickity,
+    Slider,
   },
   data() {
     return {
       allPosts: null,
       showAllPosts: false,
-      flickityOptions: {
-        prevNextButtons: false,
-        pageDots: false,
-        contain: true,
-      },
+      showModal: false,
+      modalData: null,
     };
   },
   created() {
@@ -66,6 +55,11 @@ export default {
     },
     loadMorePosts() {
       this.showAllPosts = true;
+    },
+    openModal(post) {
+      this.showModal = true;
+      this.$emit('sendModalData', post);
+      this.modalData = post;
     },
   },
 };
