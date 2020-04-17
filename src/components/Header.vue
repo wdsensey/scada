@@ -12,10 +12,10 @@
         </div>
         <div class="mobile-menu" :class="{ open: isOpenMobileMenu }">
           <router-link exact :to="{ name: 'Home' }" class="header-link" active-class="active">
-            home
+            <div class="" @click="isOpenMobileMenu = false">home</div>
           </router-link>
           <router-link :to="{ name: 'AddPost' }" class="header-link" active-class="active">
-            new post
+            <div class="" @click="isOpenMobileMenu = false">new post</div>
           </router-link>
         </div>
         <div class="menu" @click="isOpenMobileMenu = !isOpenMobileMenu">

@@ -228,7 +228,6 @@ a {
       left: 0;
       transform: translateY(-50%);
       cursor: pointer;
-      z-index: 1;
       &:hover {
         path {
           fill: $red;
